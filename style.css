@@ -462,17 +462,11 @@ footer{
 .p2 .thumb{ background: linear-gradient(135deg, var(--pink), var(--purple)); }
 .p3 .thumb{ background: linear-gradient(135deg, var(--gold), var(--orange)); }
 
-/* ===== Página de participante ===== */
 .works-grid{
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 360px));
   gap: 16px;
-}
-@media (max-width: 860px){
-  .works-grid{ grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 560px){
-  .works-grid{ grid-template-columns: 1fr; }
+  justify-content: center;
 }
 .work{
   background: var(--bg-2);
