@@ -462,11 +462,24 @@ footer{
 .p2 .thumb{ background: linear-gradient(135deg, var(--pink), var(--purple)); }
 .p3 .thumb{ background: linear-gradient(135deg, var(--gold), var(--orange)); }
 
+/* ===== Página de participante ===== */
 .works-grid{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 360px));
   gap: 16px;
+  width: 100%;
   justify-content: center;
+  align-items: start;
+}
+.works-grid + .back-link{
+  display: block;
+  width: fit-content;
+  clear: both;
+  margin-top: 36px;
+}
+.works-grid + .back-link + footer{
+  clear: both;
+  margin-top: 70px;
 }
 .work{
   background: var(--bg-2);
