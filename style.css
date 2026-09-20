@@ -465,7 +465,7 @@ footer{
 /* ===== Página de participante ===== */
 .works-grid{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 360px));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 360px));
   gap: 16px;
   width: 100%;
   justify-content: center;
