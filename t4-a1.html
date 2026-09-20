@@ -35,7 +35,16 @@
   <div class="works-grid">
       <div class="work">
         <div class="media hydra-media">
-          <canvas id="hydra-canvas" aria-label="Sketch visual de Hydra"></canvas>
+          <canvas id="hydra-canvas-1" aria-label="Sketch geométrico de Hydra"></canvas>
+        </div>
+        <div class="work-info">
+          <div class="t">Composición geométrica</div>
+          <div class="d">Sketch audiovisual experimental</div>
+        </div>
+      </div>
+      <div class="work">
+        <div class="media hydra-media">
+          <canvas id="hydra-canvas-2" aria-label="Sketch visual de Hydra"></canvas>
         </div>
         <div class="work-info">
           <div class="t">Visuales en Hydra</div>
@@ -54,23 +63,42 @@
 
 <script src="https://unpkg.com/hydra-synth"></script>
 <script>
-  const hydraCanvas = document.getElementById('hydra-canvas');
-  const hydra = new Hydra({ canvas: hydraCanvas, detectAudio: false });
+  const firstHydraCanvas = document.getElementById('hydra-canvas-1');
+  const firstHydra = new Hydra({ canvas: firstHydraCanvas, detectAudio: false });
+  const firstSynth = firstHydra.synth;
 
-  s1.initCam();
+  firstSynth
+    .shape(10)
+    .scale(2, 2)
+    .scrollX(1, 0.5)
+    .repeat(2, 10)
+    .kaleid(6)
+    .color(1, 0.5, 0.7)
+    .rotate(Math.PI * 2, 0.4)
+    .add(firstSynth.osc(20, 0.5, 0, 8), 0.15)
+    .out(firstSynth.o0);
+  firstSynth.render(firstSynth.o0);
 
-  src(s1)
-    .out(o1);
+  const secondHydraCanvas = document.getElementById('hydra-canvas-2');
+  const secondHydra = new Hydra({ canvas: secondHydraCanvas, detectAudio: false });
+  const secondSynth = secondHydra.synth;
 
-  s0.initVideo('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmF4ZnVtenp1YWhoYzlrdzdyYWpoOW1nY3plM3h4Y29rMDNsZmY2YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/mEJMfDJQntvjDhdDJv/giphy.mp4');
+  secondSynth.s1.initCam();
 
-  src(s0)
+  secondSynth
+    .src(secondSynth.s1)
+    .out(secondSynth.o1);
+
+  secondSynth.s0.initVideo('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmF4ZnVtenp1YWhoYzlrdzdyYWpoOW1nY3plM3h4Y29rMDNsZmY2YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/mEJMfDJQntvjDhdDJv/giphy.mp4');
+
+  secondSynth
+    .src(secondSynth.s0)
     .scrollX(1, 0.3)
-    .add(src(o1), 0.6)
+    .add(secondSynth.src(secondSynth.o1), 0.6)
     .color(0.1, 0.4, 0.3)
-    .out(o0);
+    .out(secondSynth.o0);
 
-  render(o0);
+  secondSynth.render(secondSynth.o0);
 </script>
 <script src="script.js"></script>
 </body>
