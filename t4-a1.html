@@ -34,41 +34,17 @@
 
   <div class="works-grid">
       <div class="work">
-        <div class="media">
-          <!-- Reemplazá por: <img src="img/t1-a1-1.jpg" alt="Trabajo 1">
-               o por un video: <video src="img/t1-a1-1.mp4" controls muted loop></video> -->
-          Trabajo 1 — poné acá la imagen o el video
+        <div class="media hydra-media">
+          <canvas id="hydra-canvas" aria-label="Sketch visual de Hydra"></canvas>
         </div>
         <div class="work-info">
-          <div class="t">Título del trabajo 1</div>
-          <div class="d">Breve descripción o fecha</div>
-        </div>
-      </div>
-      <div class="work">
-        <div class="media">
-          <!-- Reemplazá por: <img src="img/t1-a1-2.jpg" alt="Trabajo 2">
-               o por un video: <video src="img/t1-a1-2.mp4" controls muted loop></video> -->
-          Trabajo 2 — poné acá la imagen o el video
-        </div>
-        <div class="work-info">
-          <div class="t">Título del trabajo 2</div>
-          <div class="d">Breve descripción o fecha</div>
-        </div>
-      </div>
-      <div class="work">
-        <div class="media">
-          <!-- Reemplazá por: <img src="img/t1-a1-3.jpg" alt="Trabajo 3">
-               o por un video: <video src="img/t1-a1-3.mp4" controls muted loop></video> -->
-          Trabajo 3 — poné acá la imagen o el video
-        </div>
-        <div class="work-info">
-          <div class="t">Título del trabajo 3</div>
-          <div class="d">Breve descripción o fecha</div>
+          <div class="t">Visuales en Hydra</div>
+          <div class="d">Sketch audiovisual experimental</div>
         </div>
       </div>
   </div>
 
-  <a class="back-link" href="taller-1.html">← Volver</a>
+  <a class="back-link" href="taller-4.html">← Volver</a>
 
   <footer>
     <span>Algorítmos Performáticos</span>
@@ -76,6 +52,27 @@
 
 </div>
 
+<script src="https://unpkg.com/hydra-synth"></script>
+<script>
+  const hydraCanvas = document.getElementById('hydra-canvas');
+  const hydra = new Hydra({ canvas: hydraCanvas, detectAudio: false });
+
+  s1.initCam();
+
+  src(s1)
+    .out(o1);
+
+  s0.initVideo('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmF4ZnVtenp1YWhoYzlrdzdyYWpoOW1nY3plM3h4Y29rMDNsZmY2YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/mEJMfDJQntvjDhdDJv/giphy.mp4');
+
+  src(s0)
+    .scrollX(1, 0.3)
+    .add(src(o1), 0.6)
+    .color(0.1, 0.4, 0.3)
+    .out(o0);
+
+  render(o0);
+</script>
 <script src="script.js"></script>
 </body>
 </html>
+
