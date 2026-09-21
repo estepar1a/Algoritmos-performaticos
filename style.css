@@ -450,7 +450,7 @@ footer{
 /* ===== Grilla de participantes (3 tarjetas) ===== */
 .participant-row{
   display: grid;
-  grid-template-columns: repeat(3, minmax(220px, 280px));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 280px));
   justify-content: center;
   align-items: center;
   gap: 18px;
