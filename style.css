@@ -359,11 +359,12 @@ footer{
 .back-link{
   display: block;
   width: fit-content;
-  margin-top: 36px;
+  margin-top: 0;
   color: var(--pink-soft);
   text-decoration: none;
   font-size: 0.9rem;
   opacity: 0.8;
+  clear: both;
 }
 .back-link:hover{ opacity: 1; }
 
@@ -449,16 +450,33 @@ footer{
 /* ===== Grilla de participantes (3 tarjetas) ===== */
 .participant-row{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 280px));
-  gap: 18px;
-  width: min(100%, 920px);
+  grid-template-columns: repeat(3, minmax(220px, 280px));
   justify-content: center;
-  align-items: start;
-  margin: 0 auto;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  margin: 0 auto 18px;
+}
+
+.participant-row .workshop-card{
+  width: 100%;
+  min-height: 88px;
+}
+
+.participant-row + .back-link{
+  display: block;
+  width: fit-content;
+  margin: 18px 0 0;
 }
 
 .participant-row .workshop-card .thumb-mark{
   font-size: 2.6rem;
+}
+
+@media (max-width: 760px){
+  .participant-row{
+    grid-template-columns: 1fr;
+  }
 }
 .participant-card .label .name,
 .participant-card .label .meta{
