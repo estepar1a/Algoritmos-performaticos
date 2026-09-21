@@ -455,6 +455,21 @@ footer{
 .participant-row .workshop-card .thumb-mark{
   font-size: 2.6rem;
 }
+.participant-card .label .name,
+.participant-card .label .meta{
+  display: block;
+  text-decoration: none;
+}
+.participant-card .label .name:hover,
+.participant-card .label .meta:hover{
+  text-decoration: underline;
+}
+.participant-card .label .name{
+  color: var(--cream);
+}
+.participant-card .label .meta{
+  color: var(--pink-soft);
+}
 .p1 .thumb{ background: linear-gradient(135deg, var(--cyan), var(--blue)); }
 .p2 .thumb{ background: linear-gradient(135deg, var(--pink), var(--purple)); }
 .p3 .thumb{ background: linear-gradient(135deg, var(--gold), var(--orange)); }
