@@ -47,6 +47,7 @@ body{
   letter-spacing: 0.3px;
   font-size: 1.05rem;
   color: var(--cream);
+   text-decoration: none;
 }
 .brand .dot{
   width:12px; height:12px; border-radius:50%;
