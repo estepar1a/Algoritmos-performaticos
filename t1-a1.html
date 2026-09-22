@@ -32,7 +32,7 @@
 
   <div class="section-label">
     <h2>Trabajos</h2>
-    <span>3 piezas</span>
+    <span>4 piezas</span>
   </div>
 
   <div class="works-grid">
@@ -69,6 +69,17 @@
           <div class="d">Pixelado y rotación generativa</div>
         </div>
       </div>
+      <div class="work">
+        <a class="hydra-preview-link" href="https://hydra.ojack.xyz/?code=cDUlMjAlM0QlMjBuZXclMjBQNSglN0Jtb2RlJTNBJTIwJ1dFQkdMJyU3RCklMEFsZXQlMjBtb2RlbG8lMjAlM0QlMjBwNS5sb2FkTW9kZWwoJ2h0dHBzJTNBJTJGJTJGcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSUyRk1hcmNvc3B1Y2luZXJpJTJGZGVtbyUyRm1hc3RlciUyRmQ5NWI2MDExYjE0OF9hX29jdG9wdXNfc3F1aWRfYWxwLm9iaiclMkMlMjB0cnVlKSUwQSUwQXNwZWVkJTIwJTNEJTIwLjUlMEElMEFwNS5mcmFtZVJhdGUoMzApJTBBJTBBcDUuZHJhdyUyMCUzRCUyMCgpJTIwJTNEJTNFJTIwJTdCJTBBJTIwJTIwcDUuYmFja2dyb3VuZCgxMCUyQzIwJTJDMzAlMkMuNSklMEElMjAlMjBwNS5zY2FsZSgyKSUzQiUwQSUyMCUyMHA1LmZpbGwoJyUyM2ZmZicpJTNCJTBBJTIwJTIwcDUuc3Ryb2tlKCUyMiUyMzAwMCUyMiklMEElMjAlMjBwNS5zdHJva2VXZWlnaHQoLjUpJTBBJTIwJTIwcDUucm90YXRlWSh0aW1lKSUzQiUwQSUyMCUyMHA1LnJvdGF0ZVooMCklM0IlMEElMjAlMjBwNS5yb3RhdGVYKHRpbWUpJTNCJTBBJTIwJTIwJTBBJTIwJTIwcDUubW9kZWwobW9kZWxvKSUwQSU3RCUwQSUwQXMwLmluaXQoJTdCJTIwc3JjJTNBJTIwcDUuY2FudmFzJTIwJTdEKSUzQiUwQSUwQXNyYyhzMCklMEElMjAlMjAuYmxlbmQoJTBBJTIwJTIwJTA5c2hhcGUoJTBBJTIwJTIwJTIwJTIwJTIwJTIwJTVCMTAlMkM5OSUyQzglMkMyNCU1RC5mYXN0KDUpJTJDJTBBJTIwJTIwJTIwJTIwJTIwJTIwJTVCLjI1JTJDLjI1JTJDLjI1JTJDLjElNUQuc21vb3RoKCklMkMlMEElMjAlMjAlMjAlMjAlMjAlMjAlNUIuNCUyQy4yJTJDLjglMkMuMSU1RC5zbW9vdGgoKSUwQSUyMCUyMCUyMCUyMCklMEElMjAlMjAlMDklMDkuY29sb3IoLjkxJTJDLjIlMkMxLjI5KSUwQSUyMCUyMCUwOSUwOS5zY2FsZSgxJTJDLjQ1KSUwQSUwOSklMEEub3V0KCklM0I%3D" target="_blank" rel="noopener noreferrer" aria-label="Abrir composición 3D en Hydra">
+          <div class="media hydra-media">
+            <canvas id="hydra-canvas-4" aria-label="Previsualización de modelo 3D en Hydra"></canvas>
+          </div>
+        </a>
+        <div class="work-info">
+          <div class="t">Modelo 3D generativo</div>
+          <div class="d">P5 WEBGL y composición Hydra</div>
+        </div>
+      </div>
   </div>
 
   <a class="back-link" href="taller-1.html">← Volver al Taller 1</a>
@@ -80,6 +91,7 @@
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.min.js"></script>
 <script src="https://unpkg.com/hydra-synth"></script>
 <script>
   const hydraCanvas = document.getElementById('hydra-canvas-1');
@@ -131,6 +143,51 @@
     .rotate([0.1, 0.8, 0.5, 0.3].smooth())
     .out(synth3.o0);
   synth3.render(synth3.o0);
+
+  const hydraCanvas4 = document.getElementById('hydra-canvas-4');
+  const hydra4 = new Hydra({ canvas: hydraCanvas4, detectAudio: false });
+  const synth4 = hydra4.synth;
+  synth4.speed = 0.5;
+  const modelUrl = 'https://raw.githubusercontent.com/Marcospucineri/demo/master/d95b6011b148_a_octopus_squid_alp.obj';
+  let model3d;
+  let p5Canvas4;
+
+  const p5Sketch4 = new p5((p) => {
+    p.preload = () => {
+      model3d = p.loadModel(modelUrl, true);
+    };
+
+    p.setup = () => {
+      p5Canvas4 = p.createCanvas(360, 225, p.WEBGL).elt;
+      p5Canvas4.style.display = 'none';
+      p.frameRate(30);
+      synth4.s0.init({ src: p5Canvas4 });
+      synth4
+        .src(synth4.s0)
+        .blend(
+          synth4.shape(
+            [10, 99, 8, 24].fast(5),
+            [0.25, 0.25, 0.25, 0.1].smooth(),
+            [0.4, 0.2, 0.8, 0.1].smooth()
+          )
+            .color(0.91, 0.2, 1.29)
+            .scale(1, 0.45)
+        )
+        .out(synth4.o0);
+      synth4.render(synth4.o0);
+    };
+
+    p.draw = () => {
+      p.background(10, 20, 30, 0.5);
+      p.scale(2);
+      p.fill('#fff');
+      p.stroke('#000');
+      p.strokeWeight(0.5);
+      p.rotateY(p.frameCount / 30);
+      p.rotateX(p.frameCount / 30);
+      p.model(model3d);
+    };
+  });
 </script>
 <script src="script.js"></script>
 </body>
