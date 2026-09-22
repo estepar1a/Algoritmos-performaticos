@@ -37,14 +37,14 @@
 
   <div class="works-grid">
       <div class="work">
-        <div class="media">
-          <!-- Reemplazá por: <img src="img/t1-a1-1.jpg" alt="Trabajo 1">
-               o por un video: <video src="img/t1-a1-1.mp4" controls muted loop></video> -->
-          Trabajo 1 — poné acá la imagen o el video
-        </div>
+        <a class="hydra-preview-link" href="https://hydra.ojack.xyz/?sketch_id=x3JH4sfwD4pCwsE2" target="_blank" rel="noopener noreferrer" aria-label="Abrir composición en Hydra">
+          <div class="media hydra-media">
+            <canvas id="hydra-canvas-1" aria-label="Previsualización de composición Hydra"></canvas>
+          </div>
+        </a>
         <div class="work-info">
-          <div class="t">Título del trabajo 1</div>
-          <div class="d">Breve descripción o fecha</div>
+          <div class="t">Composición Hydra</div>
+          <div class="d">Imagen, cámara y modulación audiovisual</div>
         </div>
       </div>
       <div class="work">
@@ -80,6 +80,26 @@
 
 </div>
 
+<script src="https://unpkg.com/hydra-synth"></script>
+<script>
+  const hydraCanvas = document.getElementById('hydra-canvas-1');
+  const hydra = new Hydra({ canvas: hydraCanvas, detectAudio: true });
+  const synth = hydra.synth;
+
+  synth.s0.initImage('https://i.imgur.com/rBkbXS3.jpeg');
+  synth.s1.initCam();
+  synth
+    .src(synth.s0)
+    .modulateScale(synth.s1)
+    .blend(
+      synth.src(synth.s1)
+        .colorama(() => synth.a.fft[0], () => synth.a.fft[0], () => synth.a.fft[0])
+        .scale(() => synth.a.fft[0])
+        .rotate([0.209, Math.random(), Math.random()].smooth(17.315))
+    )
+    .out(synth.o0);
+  synth.render(synth.o0);
+</script>
 <script src="script.js"></script>
 </body>
 </html>
