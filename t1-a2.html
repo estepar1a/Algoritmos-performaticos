@@ -12,61 +12,21 @@
   <div class="topbar">
     <div class="brand">
       <span class="dot"></span>
-      Hydra Talleres
+      <span>1 pieza</span>
       <span class="brand-sub">&nbsp;&nbsp;trabajos de alumnos, en vivo</span>
     </div>
     <nav>
       <a href="taller.html">El taller</a>
-      <a href="bio.html">Bio</a>
-      <a href="bio.html#contacto">Contacto</a>
-    </nav>
-  </div>
+          <a class="hydra-preview-link" href="https://hydra.ojack.xyz/?sketch_id=Mcvd2HUuDZz4GgJ9" target="_blank" rel="noopener noreferrer" aria-label="Abrir composición GLIMPSE en Hydra">
+            <div class="media hydra-media">
+              <canvas id="hydra-canvas-1" aria-label="Previsualización de composición GLIMPSE"></canvas>
+            </div>
+          </a>
+          <div class="work-info">
+            <div class="t">GLIMPSE</div>
+            <div class="d">Video, ruido y máscara generativa</div>
 
   <div class="page-head">
-    <h1>Nombre del<br>participante</h1>
-    <p>
-      Taller 1 · Una o dos líneas sobre esta persona y lo que exploró
-      durante el taller.
-    </p>
-  </div>
-
-  <div class="section-label">
-    <h2>Trabajos</h2>
-    <span>3 piezas</span>
-  </div>
-
-  <div class="works-grid">
-      <div class="work">
-        <div class="media">
-          <!-- Reemplazá por: <img src="img/t1-a1-1.jpg" alt="Trabajo 1">
-               o por un video: <video src="img/t1-a1-1.mp4" controls muted loop></video> -->
-          Trabajo 1 — poné acá la imagen o el video
-        </div>
-        <div class="work-info">
-          <div class="t">Título del trabajo 1</div>
-          <div class="d">Breve descripción o fecha</div>
-        </div>
-      </div>
-      <div class="work">
-        <div class="media">
-          <!-- Reemplazá por: <img src="img/t1-a1-2.jpg" alt="Trabajo 2">
-               o por un video: <video src="img/t1-a1-2.mp4" controls muted loop></video> -->
-          Trabajo 2 — poné acá la imagen o el video
-        </div>
-        <div class="work-info">
-          <div class="t">Título del trabajo 2</div>
-          <div class="d">Breve descripción o fecha</div>
-        </div>
-      </div>
-      <div class="work">
-        <div class="media">
-          <!-- Reemplazá por: <img src="img/t1-a1-3.jpg" alt="Trabajo 3">
-               o por un video: <video src="img/t1-a1-3.mp4" controls muted loop></video> -->
-          Trabajo 3 — poné acá la imagen o el video
-        </div>
-        <div class="work-info">
-          <div class="t">Título del trabajo 3</div>
-          <div class="d">Breve descripción o fecha</div>
         </div>
       </div>
   </div>
@@ -80,6 +40,53 @@
 
 </div>
 
+<script src="https://unpkg.com/hydra-synth"></script>
+<script>
+  const hydraCanvas = document.getElementById('hydra-canvas-1');
+  const hydra = new Hydra({ canvas: hydraCanvas, detectAudio: false });
+  const synth = hydra.synth;
+
+  synth.s0.initVideo('https://upload.wikimedia.org/wikipedia/commons/1/19/2022-10-09_ZBILJE_Zbiljsko_jezero_PISCES_Ribe.webm');
+  synth
+    .src(synth.s0)
+    .mult(
+      synth.noise(60, 0.5)
+        .mult(
+          synth.osc(6, 0.1, () => Math.sin(time / 1.5) + 2)
+        )
+        .mult(
+          synth.noise(5, 0.1)
+            .brightness(0.01)
+            .contrast(0.82)
+            .diff(synth.osc(10, 0.1, () => Math.sin(time / 3) + 15))
+        )
+        .diff(
+          synth.noise(3, 0.1)
+            .brightness(0.01)
+            .contrast(0.72)
+            .rotate(() => time / 33)
+        )
+        .scale(() => Math.sin(time / 6.2) * 0.12 + 0.51)
+        .modulateScale(
+          synth.osc(3, 0.1, 0.01)
+            .rotate(Math.PI / 2)
+            .color(1, 15, 19)
+            .rotate(
+              () => Math.sin(time / 25).scale(0.39).scale(1, 0.6, 1).invert(),
+              () => Math.sin(time / 5.3) * 0.004
+            )
+            .rotate(() => time / 22)
+        )
+        .color(() => Math.sin(time / 5))
+        .mask(
+          synth.shape(100, () => Math.sin(time / 5) + 1, 0.6)
+            .scale(1.2, 0.6)
+        )
+    )
+    .out(synth.o0);
+  synth.speed = 1;
+  synth.render(synth.o0);
+</script>
 <script src="script.js"></script>
 </body>
 </html>
