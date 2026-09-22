@@ -48,25 +48,25 @@
         </div>
       </div>
       <div class="work">
-        <div class="media">
-          <!-- Reemplazá por: <img src="img/t1-a1-2.jpg" alt="Trabajo 2">
-               o por un video: <video src="img/t1-a1-2.mp4" controls muted loop></video> -->
-          Trabajo 2 — poné acá la imagen o el video
-        </div>
+        <a class="hydra-preview-link" href="https://hydra.ojack.xyz/?sketch_id=tD3x5xUW2QXx1RHQ" target="_blank" rel="noopener noreferrer" aria-label="Abrir segunda composición en Hydra">
+          <div class="media hydra-media">
+            <canvas id="hydra-canvas-2" aria-label="Previsualización de segunda composición Hydra"></canvas>
+          </div>
+        </a>
         <div class="work-info">
-          <div class="t">Título del trabajo 2</div>
-          <div class="d">Breve descripción o fecha</div>
+          <div class="t">Composición Hydra 2</div>
+          <div class="d">Oscilación, cámara y modulación audiovisual</div>
         </div>
       </div>
       <div class="work">
-        <div class="media">
-          <!-- Reemplazá por: <img src="img/t1-a1-3.jpg" alt="Trabajo 3">
-               o por un video: <video src="img/t1-a1-3.mp4" controls muted loop></video> -->
-          Trabajo 3 — poné acá la imagen o el video
-        </div>
+        <a class="hydra-preview-link" href="https://hydra.ojack.xyz/?sketch_id=SiuCWU515iI7QANS" target="_blank" rel="noopener noreferrer" aria-label="Abrir tercera composición en Hydra">
+          <div class="media hydra-media">
+            <canvas id="hydra-canvas-3" aria-label="Previsualización de tercera composición Hydra"></canvas>
+          </div>
+        </a>
         <div class="work-info">
-          <div class="t">Título del trabajo 3</div>
-          <div class="d">Breve descripción o fecha</div>
+          <div class="t">Composición de ruido</div>
+          <div class="d">Pixelado y rotación generativa</div>
         </div>
       </div>
   </div>
@@ -99,6 +99,38 @@
     )
     .out(synth.o0);
   synth.render(synth.o0);
+
+  const hydraCanvas2 = document.getElementById('hydra-canvas-2');
+  const hydra2 = new Hydra({ canvas: hydraCanvas2, detectAudio: true });
+  const synth2 = hydra2.synth;
+
+  synth2.s0.initImage('https://i.imgur.com/rBkbXS3.jpeg');
+  synth2.s1.initCam();
+  synth2
+    .src(synth2.s0)
+    .modulate(synth2.osc(10))
+    .modulateScale(synth2.s1)
+    .blend(
+      synth2.src(synth2.s1)
+        .colorama(() => synth2.a.fft[0], 0, 0)
+        .scale([6, 6.5, 5.5].smooth())
+        .rotate([0.1, Math.random(), 0.3].smooth(10))
+    )
+    .out(synth2.o0);
+  synth2.render(synth2.o0);
+
+  const hydraCanvas3 = document.getElementById('hydra-canvas-3');
+  const hydra3 = new Hydra({ canvas: hydraCanvas3, detectAudio: false });
+  const synth3 = hydra3.synth;
+
+  synth3.speed = 0.2;
+  synth3
+    .noise(4, 0.3, 0.9)
+    .colorama(0.9450980392156862, 0.12941176470588237, 0.12941176470588237)
+    .pixelate([10, 20, 30, 40, 50, 60, 70, 80].smooth())
+    .rotate([0.1, 0.8, 0.5, 0.3].smooth())
+    .out(synth3.o0);
+  synth3.render(synth3.o0);
 </script>
 <script src="script.js"></script>
 </body>
