@@ -37,25 +37,25 @@
 
   <div class="works-grid">
       <div class="work">
-        <div class="media">
-          <!-- Reemplazá por: <img src="img/t1-a1-1.jpg" alt="Trabajo 1">
-               o por un video: <video src="img/t1-a1-1.mp4" controls muted loop></video> -->
-          Trabajo 1 — poné acá la imagen o el video
-        </div>
+        <a id="first-sketch-link" class="hydra-preview-link" href="https://hydra.ojack.xyz/" target="_blank" rel="noopener noreferrer" aria-label="Abrir primera composición en Hydra">
+          <div class="media hydra-media">
+            <canvas id="hydra-canvas-1" aria-label="Previsualización de la primera composición"></canvas>
+          </div>
+        </a>
         <div class="work-info">
-          <div class="t">Título del trabajo 1</div>
-          <div class="d">Breve descripción o fecha</div>
+          <div class="t">Composición geométrica</div>
+          <div class="d">Shapes, repetición y scroll</div>
         </div>
       </div>
       <div class="work">
-        <div class="media">
-          <!-- Reemplazá por: <img src="img/t1-a1-2.jpg" alt="Trabajo 2">
-               o por un video: <video src="img/t1-a1-2.mp4" controls muted loop></video> -->
-          Trabajo 2 — poné acá la imagen o el video
-        </div>
+        <a id="second-sketch-link" class="hydra-preview-link" href="https://hydra.ojack.xyz/" target="_blank" rel="noopener noreferrer" aria-label="Abrir segunda composición en Hydra">
+          <div class="media hydra-media">
+            <canvas id="hydra-canvas-2" aria-label="Previsualización de la segunda composición"></canvas>
+          </div>
+        </a>
         <div class="work-info">
-          <div class="t">Título del trabajo 2</div>
-          <div class="d">Breve descripción o fecha</div>
+          <div class="t">Composición cromática</div>
+          <div class="d">Color, modulación y oscilación</div>
         </div>
       </div>
       <div class="work">
@@ -80,6 +80,93 @@
 
 </div>
 
+<script src="https://unpkg.com/hydra-synth"></script>
+<script>
+  const firstHydra = new Hydra({
+    canvas: document.getElementById('hydra-canvas-1'),
+    detectAudio: false
+  });
+  const firstSynth = firstHydra.synth;
+  const firstSketchCode = `shape(4,0.1).scale(0.5,4).scrollY(0.234).repeatX(2).scrollX(0.37,0.1)
+.add(shape(8,0.1).scale(0.5,1).rotate(0,6).scrollY(0.18,0).repeatX(2).scrollX(0.4,0.1))
+.add(shape(8,0.1).scale(0.5,1).rotate(0,6).scrollY(0.18,0).repeatX(2).scrollX(0.34,0.1))
+.add(shape(2,0.1).scrollY(0.4469))
+.add(shape(2,0.08).scrollY(0.10))
+.add(shape(2,0.05).scrollY(0.9))
+.add(shape(4,0.1).scale(0.1,50).scrollY(0.86,0).repeatX(5).scrollX(0,0.0))
+.add(shape(4,0.1).scale(0.25,9).scrollY(0.78,0).repeatX(2).scrollX(0.55,-0.1))
+.add(shape(8,0.05).scale(0.5,1).rotate(0,6).scrollY(0.75,0).repeatX(2).scrollX(2,-0.1))
+.add(shape(8,0.05).scale(0.5,1).rotate(0,6).scrollY(0.75,0).repeatX(2).scrollX(0.1,-0.1))
+.add(shape(4,0.1).scale(0.1,50).scrollY(0.67,0).repeatX(5).scrollX(0,0.0))
+.add(shape(2,0.1).scrollY(0.60))
+.blend(solid(0,0,1))
+.out()`;
+  firstSynth.shape(4, 0.1)
+    .scale(0.5, 4)
+    .scrollY(0.234)
+    .repeatX(2)
+    .scrollX(0.37, 0.1)
+    .add(firstSynth.shape(8, 0.1).scale(0.5, 1).rotate(0, 6).scrollY(0.18, 0).repeatX(2).scrollX(0.4, 0.1))
+    .add(firstSynth.shape(8, 0.1).scale(0.5, 1).rotate(0, 6).scrollY(0.18, 0).repeatX(2).scrollX(0.34, 0.1))
+    .add(firstSynth.shape(2, 0.1).scrollY(0.4469))
+    .add(firstSynth.shape(2, 0.08).scrollY(0.10))
+    .add(firstSynth.shape(2, 0.05).scrollY(0.9))
+    .add(firstSynth.shape(4, 0.1).scale(0.1, 50).scrollY(0.86, 0).repeatX(5).scrollX(0, 0))
+    .add(firstSynth.shape(4, 0.1).scale(0.25, 9).scrollY(0.78, 0).repeatX(2).scrollX(0.55, -0.1))
+    .add(firstSynth.shape(8, 0.05).scale(0.5, 1).rotate(0, 6).scrollY(0.75, 0).repeatX(2).scrollX(2, -0.1))
+    .add(firstSynth.shape(8, 0.05).scale(0.5, 1).rotate(0, 6).scrollY(0.75, 0).repeatX(2).scrollX(0.1, -0.1))
+    .add(firstSynth.shape(4, 0.1).scale(0.1, 50).scrollY(0.67, 0).repeatX(5).scrollX(0, 0))
+    .add(firstSynth.shape(2, 0.1).scrollY(0.60))
+    .blend(firstSynth.solid(0, 0, 1))
+    .out(firstSynth.o0);
+  firstSynth.render(firstSynth.o0);
+  document.getElementById('first-sketch-link').href = 'https://hydra.ojack.xyz/?code=' + encodeURIComponent(firstSketchCode);
+
+  const secondHydra = new Hydra({
+    canvas: document.getElementById('hydra-canvas-2'),
+    detectAudio: false
+  });
+  const secondSynth = secondHydra.synth;
+  const secondSketchCode = `shape(4,0.1,0.03).scale(0.5,4).scrollY(0.234).repeatX(2).scrollX(0.37,0.1).color(0,0,1)
+.add(shape(8,0.1,0.1).scale(0.5,1).rotate(0,6).scrollY(0.18,0).repeatX(2).scrollX(0.4,0.1))
+.add(shape(8,0.1,0.1).scale(0.5,1).rotate(0,6).scrollY(0.18,0).repeatX(2).scrollX(0.34,0.1))
+.add(shape(2,0.1,0.02).scrollY(0.4469))
+.add(shape(2,0.08,0.03).scrollY(0.10))
+.add(shape(2,0.05,0.05).scrollY(0.9))
+.add(shape(4,0.1,0.1).scale(0.1,50).scrollY(0.86,0).repeatX(5).scrollX(0,0.0))
+.add(shape(4,0.1,0.02).scale(0.25,9).scrollY(0.78,0).repeatX(2).scrollX(0.55,-0.1))
+.add(shape(8,0.05,0.2).scale(0.5,1).rotate(0,6).scrollY(0.75,0).repeatX(2).scrollX(2,-0.1).color(0,0,1))
+.add(shape(8,0.05,0.2).scale(0.5,1).rotate(0,6).scrollY(0.75,0).repeatX(2).scrollX(0.1,-0.1).color(0,0,1))
+.add(shape(4,0.1,0.1).scale(0.1,50).scrollY(0.67,0).repeatX(5).scrollX(0,0.0))
+.add(shape(2,0.1,0.05).scrollY(0.60))
+.modulate(noise(0.5,0.1))
+.color(1,1,1)
+.modulate(osc(2,0.3))
+.out()`;
+  secondSynth.shape(4, 0.1, 0.03)
+    .scale(0.5, 4)
+    .scrollY(0.234)
+    .repeatX(2)
+    .scrollX(0.37, 0.1)
+    .color(0, 0, 1)
+    .add(secondSynth.shape(8, 0.1, 0.1).scale(0.5, 1).rotate(0, 6).scrollY(0.18, 0).repeatX(2).scrollX(0.4, 0.1))
+    .add(secondSynth.shape(8, 0.1, 0.1).scale(0.5, 1).rotate(0, 6).scrollY(0.18, 0).repeatX(2).scrollX(0.34, 0.1))
+    .add(secondSynth.shape(2, 0.1, 0.02).scrollY(0.4469))
+    .add(secondSynth.shape(2, 0.08, 0.03).scrollY(0.10))
+    .add(secondSynth.shape(2, 0.05, 0.05).scrollY(0.9))
+    .add(secondSynth.shape(4, 0.1, 0.1).scale(0.1, 50).scrollY(0.86, 0).repeatX(5).scrollX(0, 0))
+    .add(secondSynth.shape(4, 0.1, 0.02).scale(0.25, 9).scrollY(0.78, 0).repeatX(2).scrollX(0.55, -0.1))
+    .add(secondSynth.shape(8, 0.05, 0.2).scale(0.5, 1).rotate(0, 6).scrollY(0.75, 0).repeatX(2).scrollX(2, -0.1).color(0, 0, 1))
+    .add(secondSynth.shape(8, 0.05, 0.2).scale(0.5, 1).rotate(0, 6).scrollY(0.75, 0).repeatX(2).scrollX(0.1, -0.1).color(0, 0, 1))
+    .add(secondSynth.shape(4, 0.1, 0.1).scale(0.1, 50).scrollY(0.67, 0).repeatX(5).scrollX(0, 0))
+    .add(secondSynth.shape(2, 0.1, 0.05).scrollY(0.60))
+    .modulate(secondSynth.noise(0.5, 0.1))
+    .color(1, 1, 1)
+    .modulate(secondSynth.osc(2, 0.3))
+    .out(secondSynth.o0);
+  secondSynth.render(secondSynth.o0);
+  document.getElementById('second-sketch-link').href = 'https://hydra.ojack.xyz/?code=' + encodeURIComponent(secondSketchCode);
+</script>
 <script src="script.js"></script>
 </body>
 </html>
