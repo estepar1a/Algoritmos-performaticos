@@ -388,7 +388,7 @@ footer{
   color: var(--cream);
   opacity: 0.85;
   width: 100%;
-  max-width: 72ch;
+  max-width: none;
   margin: 0 0 14px;
   overflow-wrap: anywhere;
 }
