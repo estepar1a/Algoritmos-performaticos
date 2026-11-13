@@ -24,15 +24,104 @@
   </div>
   <div class="works-grid">
     <div class="work">
-      <div class="media">Composiciones por agregar</div>
+      <a class="hydra-preview-link" href="https://hydra.ojack.xyz/?code=JTIwbm9pc2UoMyUyQzAuNSklMEEuY29sb3IoMCUyQzElMkMwKSUwQS5yZXBlYXQoNSUyQzMlMkMwLjIlMkMwLjIpJTBBLm91dCgpJTA5" target="_blank" rel="noopener noreferrer" aria-label="Abrir composición 1 en Hydra">
+        <div class="media hydra-media">
+          <canvas id="hydra-canvas-1" aria-label="Previsualización de la composición 1"></canvas>
+        </div>
+      </a>
       <div class="work-info">
-        <div class="t">Próximamente</div>
+        <div class="t">Ruido y repetición</div>
+      </div>
+    </div>
+    <div class="work">
+      <a class="hydra-preview-link" href="https://hydra.ojack.xyz/?code=c2hhcGUoMyUyQzAuMiUyQzAuNyklMEEuc2Nyb2xsWCgwLjMlMkMzKSUwQS5zY3JvbGxZKDAzJTJDNSklMEEua2FsZWlkKDgpJTBBLmNvbG9yKDElMkMwJTJDMiklMEEucmVwZWF0KDMpJTBBLm91dCgp" target="_blank" rel="noopener noreferrer" aria-label="Abrir composición 2 en Hydra">
+        <div class="media hydra-media">
+          <canvas id="hydra-canvas-2" aria-label="Previsualización de la composición 2"></canvas>
+        </div>
+      </a>
+      <div class="work-info">
+        <div class="t">Geometría en movimiento</div>
+      </div>
+    </div>
+    <div class="work">
+      <a class="hydra-preview-link" href="https://hydra.ojack.xyz/?code=JTJGJTJGJTIwb3NjKDclMkMwLjMlMkMxKSUwQW5vaXNlKDMlMkMwLjMpJTBBLmNvbG9yKDIyJTJDMiUyQzgpJTBBLnBvc3Rlcml6ZSg4KSUwQS5vdXQoKSUwQQ%3D%3D" target="_blank" rel="noopener noreferrer" aria-label="Abrir composición 3 en Hydra">
+        <div class="media hydra-media">
+          <canvas id="hydra-canvas-3" aria-label="Previsualización de la composición 3"></canvas>
+        </div>
+      </a>
+      <div class="work-info">
+        <div class="t">Ruido posterizado</div>
+      </div>
+    </div>
+    <div class="work">
+      <a class="hydra-preview-link" href="https://hydra.ojack.xyz/?code=b3NjKDE1JTJDJTIwMi4wMSUyQyUyMDEuMSklMEEuY29sb3IoMC43MCklMEEubW9kdWxhdGVLYWxlaWQobm9pc2UoMTApKSUwQS5vdXQoKSUwQQ%3D%3D" target="_blank" rel="noopener noreferrer" aria-label="Abrir composición 4 en Hydra">
+        <div class="media hydra-media">
+          <canvas id="hydra-canvas-4" aria-label="Previsualización de la composición 4"></canvas>
+        </div>
+      </a>
+      <div class="work-info">
+        <div class="t">Kaleidoscopio modulado</div>
+      </div>
+    </div>
+    <div class="work">
+      <a class="hydra-preview-link" href="https://hydra.ojack.xyz/?code=dm9yb25vaSg1JTJDJTIwMi4wMSUyQyUyMDEuMSklMEEuY29sb3IoMi43MCklMEEubW9kdWxhdGVSb3RhdGUob3NjKDIwKSklMEEub3V0KCk%3D" target="_blank" rel="noopener noreferrer" aria-label="Abrir composición 5 en Hydra">
+        <div class="media hydra-media">
+          <canvas id="hydra-canvas-5" aria-label="Previsualización de la composición 5"></canvas>
+        </div>
+      </a>
+      <div class="work-info">
+        <div class="t">Voronoi rotativo</div>
       </div>
     </div>
   </div>
   <a class="back-link" href="taller-5.html">← Volver a Algorítmos Performáticos V</a>
   <footer><span>Algorítmos Performáticos</span></footer>
 </div>
+<script src="https://unpkg.com/hydra-synth"></script>
+<script>
+  const firstHydra = new Hydra({ canvas: document.getElementById('hydra-canvas-1'), detectAudio: false });
+  firstHydra.synth
+    .noise(3, 0.5)
+    .color(0, 1, 0)
+    .repeat(5, 3, 0.2, 0.2)
+    .out();
+  firstHydra.synth.render(firstHydra.synth.o0);
+
+  const secondHydra = new Hydra({ canvas: document.getElementById('hydra-canvas-2'), detectAudio: false });
+  secondHydra.synth
+    .shape(3, 0.2, 0.7)
+    .scrollX(0.3, 3)
+    .scrollY(3, 5)
+    .kaleid(8)
+    .color(1, 0, 2)
+    .repeat(3)
+    .out();
+  secondHydra.synth.render(secondHydra.synth.o0);
+
+  const thirdHydra = new Hydra({ canvas: document.getElementById('hydra-canvas-3'), detectAudio: false });
+  thirdHydra.synth
+    .noise(3, 0.3)
+    .color(22, 2, 8)
+    .posterize(8)
+    .out();
+  thirdHydra.synth.render(thirdHydra.synth.o0);
+
+  const fourthHydra = new Hydra({ canvas: document.getElementById('hydra-canvas-4'), detectAudio: false });
+  fourthHydra.synth
+    .osc(15, 2.01, 1.1)
+    .color(0.7)
+    .modulateKaleid(fourthHydra.synth.noise(10))
+    .out();
+  fourthHydra.synth.render(fourthHydra.synth.o0);
+
+  const fifthHydra = new Hydra({ canvas: document.getElementById('hydra-canvas-5'), detectAudio: false });
+  fifthHydra.synth
+    .voronoi(5, 2.01, 1.1)
+    .color(2.7)
+    .modulateRotate(fifthHydra.synth.osc(20))
+    .out();
+  fifthHydra.synth.render(fifthHydra.synth.o0);
+</script>
 <script src="script.js"></script>
 </body>
 </html>
