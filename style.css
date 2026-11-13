@@ -465,6 +465,26 @@ footer{
   width: 100%;
   min-height: 88px;
 }
+.participant-card .participant-photo{
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+.participant-row.participant-row-photos{
+  grid-template-columns: repeat(4, 150px);
+  gap: 24px;
+  overflow-x: auto;
+  justify-content: center;
+}
+.participant-row-photos .participant-card .label{
+  min-height: 104px;
+}
+@media (max-width: 760px){
+  .participant-row.participant-row-photos{
+    justify-content: start;
+  }
+}
 
 .participant-row + .back-link{
   display: block;
