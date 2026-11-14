@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Participante 3</title>
+<title>AP V: Julio Cesar Bolaños Palacios</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,22 +17,38 @@
     </nav>
   </div>
   <div class="page-head">
-    <h1>Participante 3</h1>
+    <h1>Julio Cesar Bolaños Palacios</h1>
   </div>
   <div class="section-label">
     <h2>Composiciones</h2>
   </div>
   <div class="works-grid">
     <div class="work">
-      <div class="media">Composiciones por agregar</div>
-      <div class="work-info">
-        <div class="t">Próximamente</div>
-      </div>
+      <a class="hydra-preview-link" href="https://hydra.ojack.xyz/?code=czAuaW5pdENhbSgpJTBBc3JjKHMwKSUwQSUwOS5yZXBlYXQoMiUyQyUyMDQpJTBBJTA5LmthbGVpZCgxMCklMEElMEElMDkubW9kdWxhdGUoJTBBJTA5JTA5bm9pc2UoMyUyQyUyMDAuMSklMkMlMEElMDklMDkwLjUlMEElMDkpJTBBJTA5Lmh1ZSglMEElMDklMDkwLjUlMEElMDkpJTBBJTA5Lm91dCgpJTBB" target="_blank" rel="noopener noreferrer" aria-label="Abrir composición de Julio Cesar Bolaños Palacios en Hydra">
+        <div class="media hydra-media">
+          <canvas id="hydra-canvas-1" aria-label="Previsualización de la composición con cámara"></canvas>
+        </div>
+      </a>
     </div>
   </div>
   <a class="back-link" href="taller-5.html">← Volver a Algorítmos Performáticos V</a>
   <footer><span>Algorítmos Performáticos</span></footer>
 </div>
+<script src="https://unpkg.com/hydra-synth"></script>
+<script>
+  const hydra = new Hydra({ canvas: document.getElementById('hydra-canvas-1'), detectAudio: false });
+  const synth = hydra.synth;
+
+  synth.s0.initCam();
+  synth
+    .src(synth.s0)
+    .repeat(2, 4)
+    .kaleid(10)
+    .modulate(synth.noise(3, 0.1), 0.5)
+    .hue(0.5)
+    .out(synth.o0);
+  synth.render(synth.o0);
+</script>
 <script src="script.js"></script>
 </body>
 </html>

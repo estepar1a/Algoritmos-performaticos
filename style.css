@@ -472,7 +472,9 @@ footer{
   object-fit: cover;
 }
 .participant-row.participant-row-photos{
-  grid-template-columns: repeat(4, 150px);
+  grid-template-columns: none;
+  grid-auto-columns: 150px;
+  grid-auto-flow: column;
   gap: 24px;
   overflow-x: auto;
   justify-content: center;
@@ -574,6 +576,9 @@ footer{
   height: 100%;
   display: block;
   object-fit: cover;
+}
+.works-grid .work-info{
+  display: none;
 }
 .work .work-info{
   padding: 13px 15px 15px;
