@@ -84,11 +84,15 @@
   const secondHydra = new Hydra({ canvas: secondHydraCanvas, detectAudio: false });
   const secondSynth = secondHydra.synth;
 
-  secondSynth.s1.initCam();
+  const canUseCamera = location.protocol === 'https:' ||
+    (location.protocol === 'http:' && ['localhost', '127.0.0.1', '::1'].includes(location.hostname));
+  if (canUseCamera) secondSynth.s1.initCam();
 
-  secondSynth
-    .src(secondSynth.s1)
-    .out(secondSynth.o1);
+  if (canUseCamera) {
+    secondSynth.src(secondSynth.s1).out(secondSynth.o1);
+  } else {
+    secondSynth.noise(4, 0.3).out(secondSynth.o1);
+  }
 
   secondSynth.s0.initVideo('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmF4ZnVtenp1YWhoYzlrdzdyYWpoOW1nY3plM3h4Y29rMDNsZmY2YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/mEJMfDJQntvjDhdDJv/giphy.mp4');
 

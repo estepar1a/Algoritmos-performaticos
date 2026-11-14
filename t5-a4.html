@@ -54,15 +54,42 @@
 </div>
 <script src="https://unpkg.com/hydra-synth"></script>
 <script>
+  const renderCameraFallback = (synth, fallbackFn) => {
+    const isLocalWebPreview = location.protocol === 'http:' && ['localhost', '127.0.0.1', '::1'].includes(location.hostname);
+    const canUseCamera = location.protocol === 'https:' || isLocalWebPreview;
+
+    if (canUseCamera && navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function') {
+      try {
+        synth.s0.initCam();
+        return false;
+      } catch (error) {
+        // Si el navegador bloquea la cámara, usamos un patrón visual alternativo.
+      }
+    }
+
+    fallbackFn();
+    return true;
+  };
+
   const firstHydra = new Hydra({ canvas: document.getElementById('hydra-canvas-1'), detectAudio: false });
   const firstSynth = firstHydra.synth;
-  firstSynth.s0.initCam();
-  firstSynth.src(firstSynth.s0)
-    .pixelate(50, 50)
-    .repeat(3, 3)
-    .modulate(firstSynth.osc(10, 0.2, 100), 0.5)
-    .luma(0.1)
-    .out(firstSynth.o0);
+  const firstFallback = () => {
+    firstSynth.noise(10, 0.35)
+      .color(1, 0.75, 0.3)
+      .pixelate(28, 28)
+      .repeat(2, 2)
+      .modulate(firstSynth.osc(10, 0.2, 100), 0.6)
+      .out(firstSynth.o0);
+  };
+
+  if (!renderCameraFallback(firstSynth, firstFallback)) {
+    firstSynth.src(firstSynth.s0)
+      .pixelate(50, 50)
+      .repeat(3, 3)
+      .modulate(firstSynth.osc(10, 0.2, 100), 0.5)
+      .luma(0.1)
+      .out(firstSynth.o0);
+  }
   firstSynth.render(firstSynth.o0);
 
   let secondMouseX = 0;
@@ -98,11 +125,19 @@
 
   const fifthHydra = new Hydra({ canvas: document.getElementById('hydra-canvas-5'), detectAudio: false });
   const fifthSynth = fifthHydra.synth;
-  fifthSynth.s0.initCam();
-  fifthSynth.src(fifthSynth.s0)
-    .blend(fifthSynth.noise(3))
-    .diff(fifthSynth.noise(0.5, 0.5).rotate(0, 0.05))
-    .out(fifthSynth.o0);
+  const fifthFallback = () => {
+    fifthSynth.noise(4, 0.3)
+      .blend(fifthSynth.osc(12, 0.2, 1.2))
+      .diff(fifthSynth.noise(0.5, 0.5).rotate(0, 0.05))
+      .out(fifthSynth.o0);
+  };
+
+  if (!renderCameraFallback(fifthSynth, fifthFallback)) {
+    fifthSynth.src(fifthSynth.s0)
+      .blend(fifthSynth.noise(3))
+      .diff(fifthSynth.noise(0.5, 0.5).rotate(0, 0.05))
+      .out(fifthSynth.o0);
+  }
   fifthSynth.render(fifthSynth.o0);
 </script>
 <script src="script.js"></script>

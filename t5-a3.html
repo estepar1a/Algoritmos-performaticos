@@ -39,9 +39,11 @@
   const hydra = new Hydra({ canvas: document.getElementById('hydra-canvas-1'), detectAudio: false });
   const synth = hydra.synth;
 
-  synth.s0.initCam();
-  synth
-    .src(synth.s0)
+  const canUseCamera = location.protocol === 'https:' ||
+    (location.protocol === 'http:' && ['localhost', '127.0.0.1', '::1'].includes(location.hostname));
+  if (canUseCamera) synth.s0.initCam();
+  const preview = canUseCamera ? synth.src(synth.s0) : synth.noise(4, 0.3);
+  preview
     .repeat(2, 4)
     .kaleid(10)
     .modulate(synth.noise(3, 0.1), 0.5)

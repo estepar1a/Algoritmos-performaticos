@@ -67,10 +67,13 @@
   });
   const firstSynth = firstHydra.synth;
 
-  firstSynth.s0.initCam();
+  const canUseCamera = location.protocol === 'https:' ||
+    (location.protocol === 'http:' && ['localhost', '127.0.0.1', '::1'].includes(location.hostname));
+  if (canUseCamera) firstSynth.s0.initCam();
+  const cameraSource = canUseCamera ? firstSynth.s0 : firstSynth.noise(4, 0.3);
   firstSynth
     .voronoi()
-    .modulateScale(firstSynth.s0, () => Math.sin(time) * 0.8)
+    .modulateScale(cameraSource, () => Math.sin(time) * 0.8)
     .colorama(() => Math.sin(time / 4))
     .out(firstSynth.o0);
   firstSynth.render(firstSynth.o0);

@@ -82,21 +82,26 @@
 <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.min.js"></script>
 <script src="https://unpkg.com/hydra-synth"></script>
 <script>
+  const canUseCamera = location.protocol === 'https:' ||
+    (location.protocol === 'http:' && ['localhost', '127.0.0.1', '::1'].includes(location.hostname));
+
   const hydraCanvas = document.getElementById('hydra-canvas-1');
   const hydra = new Hydra({ canvas: hydraCanvas, detectAudio: true });
   const synth = hydra.synth;
 
   synth.s0.initImage('https://i.imgur.com/rBkbXS3.jpeg');
-  synth.s1.initCam();
+  if (canUseCamera) synth.s1.initCam();
+  const firstCameraSource = canUseCamera ? synth.s1 : synth.noise(4, 0.3);
+  const firstCameraOverlay = canUseCamera
+    ? synth.src(synth.s1)
+    : synth.noise(4, 0.3);
   synth
     .src(synth.s0)
-    .modulateScale(synth.s1)
-    .blend(
-      synth.src(synth.s1)
-        .colorama(() => synth.a.fft[0], () => synth.a.fft[0], () => synth.a.fft[0])
-        .scale(() => synth.a.fft[0])
-        .rotate([0.209, Math.random(), Math.random()].smooth(17.315))
-    )
+    .modulateScale(firstCameraSource)
+    .blend(firstCameraOverlay
+      .colorama(() => synth.a.fft[0], () => synth.a.fft[0], () => synth.a.fft[0])
+      .scale(() => synth.a.fft[0])
+      .rotate([0.209, Math.random(), Math.random()].smooth(17.315)))
     .out(synth.o0);
   synth.render(synth.o0);
 
@@ -105,17 +110,19 @@
   const synth2 = hydra2.synth;
 
   synth2.s0.initImage('https://i.imgur.com/rBkbXS3.jpeg');
-  synth2.s1.initCam();
+  if (canUseCamera) synth2.s1.initCam();
+  const secondCameraSource = canUseCamera ? synth2.s1 : synth2.noise(4, 0.3);
+  const secondCameraOverlay = canUseCamera
+    ? synth2.src(synth2.s1)
+    : synth2.noise(4, 0.3);
   synth2
     .src(synth2.s0)
     .modulate(synth2.osc(10))
-    .modulateScale(synth2.s1)
-    .blend(
-      synth2.src(synth2.s1)
-        .colorama(() => synth2.a.fft[0], 0, 0)
-        .scale([6, 6.5, 5.5].smooth())
-        .rotate([0.1, Math.random(), 0.3].smooth(10))
-    )
+    .modulateScale(secondCameraSource)
+    .blend(secondCameraOverlay
+      .colorama(() => synth2.a.fft[0], 0, 0)
+      .scale([6, 6.5, 5.5].smooth())
+      .rotate([0.1, Math.random(), 0.3].smooth(10)))
     .out(synth2.o0);
   synth2.render(synth2.o0);
 
